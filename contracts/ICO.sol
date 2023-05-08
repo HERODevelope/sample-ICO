@@ -10,20 +10,31 @@ contract ICO {
     uint256 public hardCap;
     uint256 public minPurchaseAmount;
     uint256 public maxPurchaseAmount;
+    uint256 public startTime;
+    uint256 public endTime;
     bool public isICOActive;
 
     event Deposit(address indexed from, uint256 value);
     event Withdraw(address indexed to, uint256 value);
     event Claim(address indexed to, uint256 value);
 
-    constructor(ICOToken _token, uint256 _softCap, uint256 _hardCap, uint256 _minPurchaseAmount, uint256 _maxPurchaseAmount) {
+    constructor(
+        ICOToken _token,
+        uint256 _softCap,
+        uint256 _hardCap,
+        uint256 _minPurchaseAmount,
+        uint256 _maxPurchaseAmount,
+        uint256 _startTime,
+        uint256 _endTime
+    ) {
         token = _token;
         owner = msg.sender;
         softCap = _softCap;
         hardCap = _hardCap;
         minPurchaseAmount = _minPurchaseAmount;
         maxPurchaseAmount = _maxPurchaseAmount;
-        isICOActive = true;
+        startTime = _startTime;
+        endTime = _endTime;
     }
 
     modifier onlyOwner() {
@@ -31,15 +42,24 @@ contract ICO {
         _;
     }
 
-    function depositFunds() public payable {
-        require(isICOActive, "ICO is not active.");
-        require(msg.value >= minPurchaseAmount && msg.value <= maxPurchaseAmount, "Invalid purchase amount.");
+    modifier onlyDuringICO() {
+        require(block.timestamp >= startTime, "ICO has not yet started.");
+        require(block.timestamp <= endTime, "ICO has ended.");
+        require(address(this).balance < hardCap, "Hard cap reached.");
+        _;
+    }
+
+    function depositFunds() public payable onlyDuringICO(){
+        require(
+            msg.value >= minPurchaseAmount && msg.value <= maxPurchaseAmount,
+            "Invalid purchase amount."
+        );
         deposit[msg.sender] += msg.value;
         emit Deposit(msg.sender, msg.value);
     }
 
     function withdrawFunds() public {
-        require(!isICOActive, "ICO is still active.");
+        require(block.timestamp > endTime, "ICO has not ended.");
         require(address(this).balance < softCap, "Soft cap reached.");
         payable(msg.sender).transfer(deposit[msg.sender]);
         deposit[msg.sender] = 0;
@@ -47,16 +67,16 @@ contract ICO {
     }
 
     function claimTokens() public {
-        require(!isICOActive || address(this).balance > hardCap, "ICO is still active.");
+        require(
+            block.timestamp > endTime || address(this).balance >= hardCap,
+            "ICO has not ended or Hard cap not reached."
+        );
         require(address(this).balance >= softCap, "Soft cap not reached.");
         uint256 depositAmount = deposit[msg.sender];
         require(depositAmount > 0, "No deposit found for this address.");
         deposit[msg.sender] = 0;
-        token.transfer(msg.sender, depositAmount);
-        emit Claim(msg.sender, depositAmount);
-    }
-
-    function endICO() public onlyOwner {
-        isICOActive = false;
+        uint256 tokenAmount = depositAmount / 0.001 ether;
+        token.transfer(msg.sender, tokenAmount);
+        emit Claim(msg.sender, tokenAmount);
     }
 }
