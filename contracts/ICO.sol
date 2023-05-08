@@ -38,16 +38,17 @@ contract ICO {
         emit Deposit(msg.sender, msg.value);
     }
 
-    function withdrawFunds() public onlyOwner {
+    function withdrawFunds() public {
         require(!isICOActive, "ICO is still active.");
-        require(address(this).balance >= softCap, "Soft cap not reached.");
-        payable(owner).transfer(address(this).balance);
-        emit Withdraw(owner, address(this).balance);
+        require(address(this).balance < softCap, "Soft cap reached.");
+        payable(msg.sender).transfer(deposit[msg.sender]);
+        deposit[msg.sender] = 0;
+        emit Withdraw(msg.sender, deposit[msg.sender]);
     }
 
     function claimTokens() public {
-        require(!isICOActive, "ICO is still active.");
-        require(address(this).balance < softCap, "Soft cap reached.");
+        require(!isICOActive || address(this).balance > hardCap, "ICO is still active.");
+        require(address(this).balance >= softCap, "Soft cap not reached.");
         uint256 depositAmount = deposit[msg.sender];
         require(depositAmount > 0, "No deposit found for this address.");
         deposit[msg.sender] = 0;
