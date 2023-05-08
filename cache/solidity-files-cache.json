@@ -1,0 +1,77 @@
+{
+  "_format": "hh-sol-cache-2",
+  "files": {
+    "F:\\Projects\\ICO-DAPP\\sample-ICO\\contracts\\ICO.sol": {
+      "lastModificationDate": 1683581329410,
+      "contentHash": "632490787e5152cbaf5e4fb0ace834d9",
+      "sourceName": "contracts/ICO.sol",
+      "solcConfig": {
+        "version": "0.8.18",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./ICOToken.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "ICO"
+      ]
+    },
+    "F:\\Projects\\ICO-DAPP\\sample-ICO\\contracts\\ICOToken.sol": {
+      "lastModificationDate": 1683581346048,
+      "contentHash": "c2c393956d5b6f1e944ef687c22008e7",
+      "sourceName": "contracts/ICOToken.sol",
+      "solcConfig": {
+        "version": "0.8.18",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "ICOToken"
+      ]
+    }
+  }
+}
