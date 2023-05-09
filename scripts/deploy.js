@@ -5,10 +5,18 @@ async function main() {
 
   console.log("Account balance:", (await deployer.getBalance()).toString());
 
-  const Token = await ethers.getContractFactory("Token");
-  const token = await Token.deploy();
+  const ICOToken = await ethers.getContractFactory("ICOToken");
+  token = await ICOToken.deploy();
+  await token.deployed();
+
+  const ICO = await ethers.getContractFactory("ICO");
+  ico = await ICO.deploy(token.address);
+  await ico.deployed();
+
+  await token.transfer(ico.address, 5000);
 
   console.log("Token address:", token.address);
+  console.log("ICO address:", ico.address);
 }
 
 main()
