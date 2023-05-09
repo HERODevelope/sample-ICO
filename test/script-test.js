@@ -5,6 +5,7 @@
 // import "hardhat/console.sol";
 const { ethers } = require("hardhat");
 const { expect } = require("chai");
+const { loadFixture } = require("@nomicfoundation/hardhat-network-helpers");
 
 describe("ICO", function () {
     let ico;
@@ -31,7 +32,7 @@ describe("ICO", function () {
 
     const startTime = datetoTimestamp("2023/05/07 02:00:00"); 
     const endTime = datetoTimestamp("2023/05/10 02:00:00"); 
-    beforeEach(async function () {
+    async function prepare() {
         [owner, investor1, investor2] = await ethers.getSigners();
 
         const ICOToken = await ethers.getContractFactory("ICOToken");
@@ -52,7 +53,11 @@ describe("ICO", function () {
         await ico.deployed();
 
         await token.transfer(ico.address, 5000);
-    });
+    };
+
+    beforeEach(async function(){
+      await loadFixture(prepare);
+    })
 
     it("should allow investors to deposit funds", async function () {
         // Investor 1 deposits 0.04 BNB
@@ -116,27 +121,30 @@ describe("ICO", function () {
         await ico.connect(investor1).withdraw();
         const finalBalance = await ethers.provider.getBalance(investor1.address);
         expect(await ico.deposits(investor1.address)).to.equal(0);
-
         // expect(finalBalance.sub(initialBalance)).to.equal(ethers.utils.parseEther("0.04"));
     });
 
     it("should not allow investors to withdraw funds after ICO if softcap is reached", async function () {
-        // Investor 1 deposits 0.04 BNB
+        // Investor 1 deposits 0.08 BNB
+        await ico.connect(investor1).deposit({ value: ethers.utils.parseEther("0.04") });
         await ico.connect(investor1).deposit({ value: ethers.utils.parseEther("0.04") });
 
         // Investor 2 deposits 0.02 BNB
         await ico.connect(investor2).deposit({ value: ethers.utils.parseEther("0.02") });
 
+        await expect(ico.connect(investor1).withdraw()).to.be.revertedWith("ICO has not ended.");
+
         // Wait for ICO to end
         await ethers.provider.send("evm_setNextBlockTimestamp", [endTime + 1]);
 
         // Softcap is reached, so investors cannot withdraw their funds
-        await expect(ico.connect(investor1).withdraw()).to.be.revertedWith("Softcap not reached");
-        await expect(ico.connect(investor2).withdraw()).to.be.revertedWith("Softcap not reached");
+        await expect(ico.connect(investor1).withdraw()).to.be.revertedWith("Softcap reached");
+        await expect(ico.connect(investor2).withdraw()).to.be.revertedWith("Softcap reached");
     });
 
     it("should allow investors to claim tokens after ICO if softcap is reached", async function () {
-        // Investor 1 deposits 0.04 BNB
+        // Investor 1 deposits 0.08 BNB
+        await ico.connect(investor1).deposit({ value: ethers.utils.parseEther("0.04") });
         await ico.connect(investor1).deposit({ value: ethers.utils.parseEther("0.04") });
 
         // Investor 2 deposits 0.02 BNB
@@ -152,8 +160,8 @@ describe("ICO", function () {
         await ico.connect(investor2).claim();
         const finalBalance1 = await token.balanceOf(investor1.address);
         const finalBalance2 = await token.balanceOf(investor2.address);
-
-        expect(finalBalance1.sub(initialBalance1)).to.equal(ethers.utils.parseEther("40"));
+        
+        expect(finalBalance1.sub(initialBalance1)).to.equal(ethers.utils.parseEther("80"));
         expect(finalBalance2.sub(initialBalance2)).to.equal(ethers.utils.parseEther("20"));
     });
 

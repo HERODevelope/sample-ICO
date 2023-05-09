@@ -52,11 +52,7 @@ contract ICO is Ownable {
         require(msg.value <= maxPurchase, "Amount is more than maximum purchase amount");
         require(hardcap - address(this).balance > msg.value, "Amount exceeds Hard cap");
 
-        uint256 tokens = msg.value / rate;
-        require(token.balanceOf(address(this)) >= tokens, "Insufficient tokens in ICO contract");
-
         deposits[msg.sender] += msg.value;
-        token.transfer(msg.sender, tokens);
 
         emit Deposit(msg.sender, msg.value);
     }
@@ -79,10 +75,10 @@ contract ICO is Ownable {
             "ICO has not ended or Hard cap not reached."
         );
         require(address(this).balance >= softcap, "Softcap not reached");
+        require(deposits[msg.sender] > 0, "No deposits to withdraw");
 
-        uint256 tokens = token.balanceOf(address(this));
-        require(tokens > 0, "No tokens to claim");
-
+        uint256 tokens = deposits[msg.sender] / rate;
+        require(token.balanceOf(address(this)) >= tokens, "Insufficient tokens in ICO contract");
         token.transfer(msg.sender, tokens);
 
         emit Claim(msg.sender, tokens);
