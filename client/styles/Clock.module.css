@@ -1,0 +1,85 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:100,200,200,regular,500,600,700,800,900,100italic,200italic,200italic,italic,500italic,600italic,700italic,800italic,900italic");
+
+
+.clock-wrapper {
+  width: 216px;
+  height: 216px;
+  background-color: #bd48bd77;
+  border-radius: 30px;
+  box-shadow: 0 0 20px #882352;
+}
+
+.clock-wrapper__main {
+  position: absolute;
+  width: 216px;
+  height: 216px;
+  display: flex;
+  justify-content: left;
+  align-items: left;
+}
+
+.clock-wrapper__main__circle {
+  position: relative;
+  width: 216px;
+  height: 216px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.clock-wrapper__main__circle__svg {
+  position: relative;
+  width: 216px;
+  height: 216px;
+  transform: rotate(270deg);
+}
+
+.clock-wrapper__main__circle__svg circle {
+  position: relative;
+  fill: transparent;
+  stroke: #f0f2f398;
+  stroke-width: 8px;
+  transform: translate(0px, 0px);
+  width: 192px;
+  height: 192px;
+}
+
+.clock-wrapper__main__circle__svg circle:nth-child(2) {
+  stroke: #410303;
+}
+
+.clock-wrapper__main__circle__dot {
+  position: absolute;
+  width: 216px;
+  height: 216px;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+}
+
+.clock-wrapper__main__circle__dot::before {
+  content: '';
+  position: relative;
+  top: 0px;
+  width: 15px;
+  height: 15px;
+  background-color: #ff006a;
+  border-radius: 100%;
+  box-shadow: 0 0 20px #ff00ea, 0 0 60px #ff00d4;
+}
+
+.clock-wrapper__main__circle__time {
+  color: #9e4d4d;
+  font-family: "Montserrat", sans-serif;
+  font-size: 50px;
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+
+.clock-wrapper__main__circle__time .dots {
+  color: #151718;
+  text-shadow: 0 0.5px 1px #7d8686;
+}
