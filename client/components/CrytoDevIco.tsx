@@ -391,13 +391,13 @@ export default function CrytoDevIco({ }: Props) {
         </div>
 
         <div className={styles.hardcap}>
-          🚏 Hardcap : 2 BNB
+          🚏 Hardcap : 1 BNB
         </div>
 
         <div className={styles.spec}>
           <p className={styles.para}>ICO Rate : 0.001 BNB</p>
           <p className={styles.para}>Minimum Purchase amount : 0.01 BNB</p>
-          <p className={styles.para}>Maximum Purchase amount : 0.5 BNB</p>
+          <p className={styles.para}>Maximum Purchase amount : 0.05 BNB</p>
         </div>
 
         <div className={styles.clockposition}>
