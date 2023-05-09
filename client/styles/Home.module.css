@@ -16,8 +16,8 @@
 
 .clockposition {
   position: absolute;
-  top: 0px;
-  left: 0px;
+  top: 50px;
+  left: 100px;
 }
 
 .footer {
@@ -97,7 +97,7 @@
   font-size: 1.2rem;
   position: absolute;
   top: 700px;
-  left: 810px;
+  left: 510px;
 }
 
 .spec {
@@ -146,9 +146,9 @@
 .clock_wrapper {
   width: 216px;
   height: 216px;
-  background-color: #c291c200;
-  border-radius: 30px;
-  box-shadow: 0 0 20px #e974aa75;
+  background-color: #030303;
+  border-radius: 40px;
+  box-shadow: 0 0 20px #d6cbd0e5;
 }
 
 .clock_wrapper__main {
@@ -187,7 +187,7 @@
 }
 
 .clock_wrapper__main__circle__svg circle:nth-child(2) {
-  stroke: #bb12a4;
+  stroke: #c75db7c0;
 }
 
 .clock_wrapper__main__circle__dot {
@@ -205,13 +205,13 @@
   top: 0px;
   width: 15px;
   height: 15px;
-  background-color: #ff006a;
+  background-color: #18090f;
   border-radius: 100%;
-  box-shadow: 0 0 20px #ff00ea, 0 0 60px #ff00d4;
+  box-shadow: 0 0 20px #ccafca, 0 0 60px #c0bbbf;
 }
 
 .clock_wrapper__main__circle__time {
-  color: #9e4d4d;
+  color: #f2f3f8;
   font-family: "Montserrat", sans-serif;
   font-size: 50px;
   position: absolute;

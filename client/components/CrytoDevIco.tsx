@@ -371,15 +371,15 @@ export default function CrytoDevIco({ }: Props) {
           <img className={styles.image} src="./0.svg" />
         </div>
         <div className={styles.progressbar}>
-          <Progressbar bgcolor={"#6a1b9a"} completed={2} />
+          <Progressbar bgcolor={"#3a3658"} completed={70} />
         </div>
 
         <div className={styles.starttime}>
-          Start time : 2023/8/5, 9:00 AM
+          Start time : 2023/8/5 9:00 AM
         </div>
 
         <div className={styles.endtime}>
-          End time : 2023/8/6, 9:00 AM
+          End time : 2023/8/6  9:00 AM
         </div>
 
         <div className={styles.totalbnb}>
@@ -391,13 +391,13 @@ export default function CrytoDevIco({ }: Props) {
         </div>
 
         <div className={styles.hardcap}>
-          🚏 Hardcap : 2 BNB
+          🚏 Hardcap : 1 BNB
         </div>
 
         <div className={styles.spec}>
           <p className={styles.para}>ICO Rate : 0.001 BNB</p>
           <p className={styles.para}>Minimum Purchase amount : 0.01 BNB</p>
-          <p className={styles.para}>Maximum Purchase amount : 0.5 BNB</p>
+          <p className={styles.para}>Maximum Purchase amount : 0.05 BNB</p>
         </div>
 
         <div className={styles.clockposition}>
