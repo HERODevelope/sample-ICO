@@ -371,15 +371,15 @@ export default function CrytoDevIco({ }: Props) {
           <img className={styles.image} src="./0.svg" />
         </div>
         <div className={styles.progressbar}>
-          <Progressbar bgcolor={"#6a1b9a"} completed={2} />
+          <Progressbar bgcolor={"#3a3658"} completed={70} />
         </div>
 
         <div className={styles.starttime}>
-          Start time : 2023/8/5, 9:00 AM
+          Start time : 2023/8/5 9:00 AM
         </div>
 
         <div className={styles.endtime}>
-          End time : 2023/8/6, 9:00 AM
+          End time : 2023/8/6  9:00 AM
         </div>
 
         <div className={styles.totalbnb}>
