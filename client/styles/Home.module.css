@@ -9,7 +9,7 @@
 
 .progressbar {
   position: absolute;
-  top: 700px;
+  top: 750px;
   left: 210px;
   width: 1500px;
 }
@@ -56,7 +56,7 @@
 
 .starttime {
   position: absolute;
-  top: 700px;
+  top: 750px;
   left: 100px;
   line-height: 1;
   margin: 2rem 0;
@@ -69,9 +69,54 @@
   margin: 2rem 0;
   font-size: 1.2rem;
   position: absolute;
-  top: 700px;
+  top: 750px;
   left: 1600px;
 }
+
+.totalbnb {
+  line-height: 1;
+  margin: 2rem 0;
+  font-size: 1.2rem;
+  position: absolute;
+  top: 700px;
+  left: 1710px;
+}
+
+.softcap {
+  line-height: 1;
+  margin: 2rem 0;
+  font-size: 1.2rem;
+  position: absolute;
+  top: 700px;
+  left: 240px;
+}
+
+.hardcap {
+  line-height: 1;
+  margin: 2rem 0;
+  font-size: 1.2rem;
+  position: absolute;
+  top: 700px;
+  left: 810px;
+}
+
+.spec {
+  line-height: 1;
+  margin: 2rem 0;
+  font-size: 2rem;
+  position: absolute;
+  top: 70px;
+  left: 1300px;
+}
+
+.para {
+  margin-bottom: 2%;
+  padding: 5px;
+}
+
+
+
+
 
 .button {
   border-radius: 4px;
@@ -84,6 +129,8 @@
   cursor: pointer;
   margin-bottom: 2%;
 }
+
+
 
 @media (max-width: 1000px) {
   .main {

@@ -17,7 +17,7 @@ import Clock from './Clock';
 
 type Props = {};
 
-export default function CrytoDevIco({}: Props) {
+export default function CrytoDevIco({ }: Props) {
   // Create a BigNumber `0`
   const zero = BigNumber.from(0);
   // walletConnected keeps track of whether the user's wallet is connected or not
@@ -37,8 +37,8 @@ export default function CrytoDevIco({}: Props) {
   // isOwner gets the owner of the contract through the signed address
   const [isOwner, setIsOwner] = useState<boolean>(false);
   // Create a reference to the Web3 Modal (used for connecting to Metamask) which persists as long as the page is open
- 
-  
+
+
   const web3ModalRef = useRef<any>();
   const getProviderAndSigner = async (): Promise<{
     provider: providers.Web3Provider;
@@ -175,13 +175,13 @@ export default function CrytoDevIco({}: Props) {
       await tx.wait();
       //To change the state of the button if the transaction is over
       setLoading(false);
-      toast.success("🎉 Successfully minted CryptoDev's token 🎉",{theme:"dark",icon:"✅"});
+      toast.success("🎉 Successfully minted CryptoDev's token 🎉", { theme: "dark", icon: "✅" });
       await getTokensToBeClaimed();
       await getTotalTokensMinted();
       await getBalanceOfCryptoDevTokens();
     } catch (e: unknown) {
       console.log(e);
-      toast.error("Error during transaction",{theme:"dark",icon:"❌"});
+      toast.error("Error during transaction", { theme: "dark", icon: "❌" });
     }
   };
 
@@ -199,13 +199,13 @@ export default function CrytoDevIco({}: Props) {
       await tx.wait();
       //To change the state of the button if the transaction is over
       setLoading(false);
-      toast.success("🎉 CryptoDev's contract has successfully been Claimed 🎉",{theme:"dark",icon:"✅"});
+      toast.success("🎉 CryptoDev's contract has successfully been Claimed 🎉", { theme: "dark", icon: "✅" });
       await getTokensToBeClaimed();
       await getTotalTokensMinted();
       await getBalanceOfCryptoDevTokens();
     } catch (e: unknown) {
       console.log(e);
-      toast.error("Error during transaction",{theme:"dark",icon:"❌"});
+      toast.error("Error during transaction", { theme: "dark", icon: "❌" });
     }
   };
 
@@ -243,25 +243,25 @@ export default function CrytoDevIco({}: Props) {
       await tx.wait();
       //To change the state of the button if the transaction is over
       setLoading(false);
-     toast.success("🎉 CryptoDev's funds has been successfully withdrawn 🎉",{theme:"dark",icon:"✅"});
+      toast.success("🎉 CryptoDev's funds has been successfully withdrawn 🎉", { theme: "dark", icon: "✅" });
       await getOwner()
     } catch (e: unknown) {
       console.log(e);
-      toast.error("Error during transaction",{theme:"dark",icon:"❌"});
+      toast.error("Error during transaction", { theme: "dark", icon: "❌" });
     }
   };
 
   const connectWallet = async () => {
-   try {
-     // Get the provider from web3Modal, which in our case is MetaMask
-     // When used for the first time, it prompts the user to connect their wallet
-      const {provider,signer} = await getProviderAndSigner()
-     
-     setWalletConnected(true);
-   } catch (err) {
-     console.error(err);
-   }
- };
+    try {
+      // Get the provider from web3Modal, which in our case is MetaMask
+      // When used for the first time, it prompts the user to connect their wallet
+      const { provider, signer } = await getProviderAndSigner()
+
+      setWalletConnected(true);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
 
   useEffect(() => {
@@ -350,16 +350,16 @@ export default function CrytoDevIco({}: Props) {
               </div>
               {renderButton()}
               {/* Display additional withdraw button if connected wallet is owner */}
-                {isOwner ? (
-                  <div>
+              {isOwner ? (
+                <div>
                   {loading ? <button className={styles.button}>Loading...</button>
-                           : <button className={styles.button} onClick={withdrawCoins}>
-                               Withdraw Coins
-                             </button>
+                    : <button className={styles.button} onClick={withdrawCoins}>
+                      Withdraw Coins
+                    </button>
                   }
-                  </div>
-                  ) : ("")
-                }
+                </div>
+              ) : ("")
+              }
             </div>
           ) : (
             <button onClick={connectWallet} className={styles.button}>
@@ -368,18 +368,36 @@ export default function CrytoDevIco({}: Props) {
           )}
         </div>
         <div>
-          <img className={styles.image} src="./0.svg" /> 
+          <img className={styles.image} src="./0.svg" />
         </div>
         <div className={styles.progressbar}>
-          <Progressbar bgcolor={"#6a1b9a"} completed={100} />
+          <Progressbar bgcolor={"#6a1b9a"} completed={2} />
         </div>
 
         <div className={styles.starttime}>
-            Start time : 2023/8/5, 9:00 AM
+          Start time : 2023/8/5, 9:00 AM
         </div>
 
         <div className={styles.endtime}>
-            End time : 2023/8/6, 9:00 AM
+          End time : 2023/8/6, 9:00 AM
+        </div>
+
+        <div className={styles.totalbnb}>
+          🚏 Total : 5 BNB
+        </div>
+
+        <div className={styles.softcap}>
+          🚏 Softcap : 0.1 BNB
+        </div>
+
+        <div className={styles.hardcap}>
+          🚏 Hardcap : 2 BNB
+        </div>
+
+        <div className={styles.spec}>
+          <p className={styles.para}>ICO Rate : 0.001 BNB</p>
+          <p className={styles.para}>Minimum Purchase amount : 0.01 BNB</p>
+          <p className={styles.para}>Maximum Purchase amount : 0.5 BNB</p>
         </div>
 
         <div className={styles.clockposition}>
@@ -389,8 +407,8 @@ export default function CrytoDevIco({}: Props) {
       </div >
 
 
-        
-      
+
+
       <footer className={styles.footer}>
         Made with &#10084; by Crypto Devs
       </footer>
