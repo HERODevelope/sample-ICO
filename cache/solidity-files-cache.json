@@ -72,8 +72,8 @@
       ]
     },
     "F:\\Projects\\ICO-DAPP\\sample-ICO - Copy\\contracts\\ICO.sol": {
-      "lastModificationDate": 1683670934764,
-      "contentHash": "ff41ed62edb92b1d5633c0ab700eb1e9",
+      "lastModificationDate": 1683677092901,
+      "contentHash": "d2a875967a9732f68a80693731199636",
       "sourceName": "contracts/ICO.sol",
       "solcConfig": {
         "version": "0.8.0",
@@ -100,7 +100,8 @@
       },
       "imports": [
         "@openzeppelin/contracts/access/Ownable.sol",
-        "./ICOToken.sol"
+        "./ICOToken.sol",
+        "hardhat/console.sol"
       ],
       "versionPragmas": [
         "^0.8.0"
@@ -328,6 +329,41 @@
       ],
       "artifacts": [
         "IERC20Metadata"
+      ]
+    },
+    "F:\\Projects\\ICO-DAPP\\sample-ICO - Copy\\node_modules\\hardhat\\console.sol": {
+      "lastModificationDate": 1683668078793,
+      "contentHash": "4ff3cd2f6272c9a6516e9ee4f2b967d3",
+      "sourceName": "hardhat/console.sol",
+      "solcConfig": {
+        "version": "0.8.0",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">= 0.4.22 <0.9.0"
+      ],
+      "artifacts": [
+        "console"
       ]
     }
   }
