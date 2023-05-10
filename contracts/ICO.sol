@@ -9,13 +9,14 @@ import "hardhat/console.sol";
 contract ICO is Ownable {
     ICOToken public token;
     mapping(address => uint256) public deposits;
-    uint256 public softcap;
-    uint256 public hardcap;
-    uint256 public minPurchase;
-    uint256 public maxPurchase;
-    uint256 public rate;
-    uint256 public startTime;
-    uint256 public endTime;
+    uint256 public softcap = 0.1 ether;
+    uint256 public hardcap = 1 ether;
+    uint256 public minPurchase = 0.01 ether;
+    uint256 public maxPurchase = 0.05 ether;
+    uint256 public rate = 0.001 ether;
+
+    uint256 public startTime = 1683676800;
+    uint256 public endTime = 1683763200;
     uint256 public totalDeposit;
 
     event Deposit(address indexed investor, uint256 amount);
@@ -23,29 +24,34 @@ contract ICO is Ownable {
     event Claim(address indexed investor, uint256 amount);
 
     constructor(
-        address _token,
-        uint256 _softcap,
-        uint256 _hardcap,
-        uint256 _minPurchase,
-        uint256 _maxPurchase,
-        uint256 _rate,
-        uint256 _startTime,
-        uint256 _endTime
+        address _token
+        // uint256 _softcap,
+        // uint256 _hardcap,
+        // uint256 _minPurchase,
+        // uint256 _maxPurchase,
+        // uint256 _rate,
+        // uint256 _startTime,
+        // uint256 _endTime
     ) {
         token = ICOToken(_token);
-        softcap = _softcap;
-        hardcap = _hardcap;
-        minPurchase = _minPurchase;
-        maxPurchase = _maxPurchase;
-        rate = _rate;
-        startTime = _startTime;
-        endTime = _endTime;
+        // softcap = _softcap;
+        // hardcap = _hardcap;
+        // minPurchase = _minPurchase;
+        // maxPurchase = _maxPurchase;
+        // rate = _rate;
+        // startTime = _startTime;
+        // endTime = _endTime;
     }
 
     modifier onlyDuringICO() {
         require(block.timestamp >= startTime, "ICO has not yet started.");
         require(block.timestamp <= endTime, "ICO has ended.");
         _;
+    }
+
+    function changeTime(uint256 start, uint256 end) external {
+        startTime = start;
+        endTime = end;
     }
 
     function deposit() external payable onlyDuringICO(){

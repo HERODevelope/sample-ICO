@@ -30,9 +30,10 @@ describe("ICO", function () {
       return timestamp;
     }
 
-    let startTime = datetoTimestamp("2023/05/07 02:00:00"); 
-    console.log(startTime)
-    const endTime = datetoTimestamp("2023/05/10 02:00:00"); 
+    let startTime = datetoTimestamp("2023/05/09 17:00:00"); 
+    console.log("Start Time: ", startTime)
+    const endTime = datetoTimestamp("2023/05/10 17:00:00"); 
+    console.log("End Time: ", endTime)
     async function prepare() {
         [owner, investor1, investor2] = await ethers.getSigners();
 
@@ -42,15 +43,16 @@ describe("ICO", function () {
 
         const ICO = await ethers.getContractFactory("ICO");
         ico = await ICO.deploy(
-            token.address,
-            softcap,
-            hardcap,
-            minPurchase,
-            maxPurchase,
-            rate,
-            startTime,
-            endTime
+            token.address
+            // softcap,
+            // hardcap,
+            // minPurchase,
+            // maxPurchase,
+            // rate,
+            // startTime,
+            // endTime
         );
+        ico.changeTime(startTime, endTime)
         await ico.deployed();
 
         await token.transfer(ico.address, 5000);
